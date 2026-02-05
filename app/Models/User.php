@@ -24,6 +24,18 @@ class User extends Authenticatable
         'email',
         'password',
         'photo',
+        'phone',
+        'venmo_zelle_id',
+        'unique_ref_id',
+        'ref_link',
+        'discount_code',
+        'business_name',
+        'ein',
+        'resale_certificate_path',
+        'shipping_address',
+        'status',
+        'ref_id',
+        'commission_percentage',
     ];
 
     /**
@@ -46,6 +58,27 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'commission_percentage' => 'decimal:2',
         ];
+    }
+
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class, 'reseller_id');
+    }
+
+    public function referredUsers()
+    {
+        return $this->hasMany(User::class, 'ref_id', 'unique_ref_id');
+    }
+
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'ref_id', 'unique_ref_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'reseller_id');
     }
 }

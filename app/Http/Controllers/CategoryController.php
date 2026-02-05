@@ -23,11 +23,11 @@ class CategoryController extends Controller
 
         $manager = new ImageManager(new Driver());
         $image = $manager->read($photo);
-        $image->save(public_path('upload/category/'.$file_name));
+        $image->save(public_path('/upload/category/'.$file_name));
 
        Category::insert([
           'category_name'=>$request->category_name,
-          'category_image'=>"http://127.0.0.1:8000/upload/category/$file_name",
+          'category_image' => "/upload/category/$file_name",
        ]);
         return back()->with('category','Category Add Successful');
 
@@ -57,7 +57,7 @@ class CategoryController extends Controller
      }
      function trash_delete($id){
       $category=Category::onlyTrashed()->find($id);
-      $delete_form=public_path('upload/category/'.$category->category_image);
+      $delete_form = public_path(ltrim(parse_url($category->category_image, PHP_URL_PATH), '/'));
       unlink($delete_form);
 
       $subs =Subcategory::where('category_id',$id)->get();

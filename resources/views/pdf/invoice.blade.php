@@ -126,27 +126,33 @@
 @php
     $order =App\Models\Order::where('order_id',$data->order_id)->first();
     $billing =App\Models\Billing::where('order_id',$data->order_id)->first();
-    $order_product =App\Models\OrderProduct::where('order_id',$data->order_id)->get();
+    $order_product =App\Models\OrderProduct::with('product')->where('order_id',$data->order_id)->get();
 @endphp
 <body>
 
   <div class="invoice-box">
     <div class="header">
-      <div class="company">SEIKH TRADERS</div>
+      <div class="company">Dazzling Shoppers</div>
       <div class="invoice-title">Invoice {{ $data->order_id }}</div>
     </div>
 
     <div class="section details">
       <div>
         <h3>Bill To:</h3>
-        <p>Clint Name:{{ $billing->name }}<br>
-        <p>Address:{{ $billing->street }}, {{ $billing->apartment }}</p>
-        <p>Email:{{ $billing->email }}</p><br>
+        <p>Client Name: {{ $billing ? $billing->name : 'N/A' }}<br>
+        <p>Address: {{ $billing ? $billing->street . ', ' . $billing->apartment : 'N/A' }}</p>
+        <p>Email: {{ $billing ? $billing->email : 'N/A' }}</p><br>
+        @if($order && $order->reseller_id)
+          <p style="background: #ecf0f1; padding: 8px; border-left: 4px solid #3498db;"><strong>Order Type:</strong> Reseller Order</p>
+        @endif
       </div>
 
       <div>
         <h3>Invoice Details:</h3>
-        <p>Date: {{ $order->created_at }}<br>
+        <p>Date: {{ $order ? $order->created_at : 'N/A' }}<br>
+        @if($order && $order->balance_used && $order->balance_used > 0)
+          <p style="background: #d5f4e6; padding: 8px; border-left: 4px solid #27ae60;"><strong>Commission Deducted:</strong> ${{ number_format($order->balance_used, 2) }}</p>
+        @endif
       </div>
     </div>
 
@@ -160,21 +166,28 @@
         </tr>
       </thead>
       <tbody>
-         @foreach ($order_product as $product)
-                    <tr>
-                        <td>{{ $product->rel_to_product->product_name }}</td>
-                        <td class="text-center">{{ $product->quantity }}</td>
-                        <td class="text-right"> {{ $product->price }} BDT</td>
-                        <td class="text-right"> {{ $product->price * $product->quantity }} BDT</td>
-                    </tr>
-                    @endforeach
+         @forelse ($order_product as $product)
+                   <tr>
+                       <td>{{ $product->product ? $product->product->product_name : 'Product not found' }}</td>
+                       <td class="text-center">{{ $product->quantity }}</td>
+                       <td class="text-right"> ${{ number_format($product->price, 2) }}</td>
+                       <td class="text-right"> ${{ number_format($product->price * $product->quantity, 2) }}</td>
+                   </tr>
+         @empty
+                   <tr>
+                       <td colspan="4" class="text-center">No products found for this order</td>
+                   </tr>
+         @endforelse
       </tbody>
     </table>
 
     <div class="total-section">
-      <h2>Subtotal:{{ $order->sub_total }} BDT</h2>
-      <h2>Discount:{{ $order->discount }} BDT</h2>
-      <h2>Total Due:{{ $order->total }} BDT</h2>
+      <h2>Subtotal: ${{ number_format($order ? $order->sub_total : 0, 2) }}</h2>
+      <h2>Discount: ${{ number_format($order ? $order->discount : 0, 2) }}</h2>
+      @if($order && $order->balance_used && $order->balance_used > 0)
+        <h2 style="background: #27ae60; color: white; padding: 10px 20px; display: inline-block; border-radius: 8px; margin-top: 15px;">Commission Applied: -${{ number_format($order->balance_used, 2) }}</h2>
+      @endif
+      <h2>Total Due: ${{ number_format($order ? $order->total : 0, 2) }}</h2>
     </div>
 
     <div class="footer">

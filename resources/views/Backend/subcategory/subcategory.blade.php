@@ -20,16 +20,13 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Subcategory Name</th>
-                                            <th>Subcategory Image</th>
                                             <th>Action</th>
                                         </tr>
                                         @foreach ($categor->rel_to_subcategory as $index=>$subcategor )
                                             <tr>
                                                 <td>{{ $index+1 }}</td>
                                                 <td>{{ $subcategor->subcategory_name }}</td>
-                                                <td>
-                                                    <img src="{{ asset('upload/subcategory') }}/{{ $subcategor->subcategory_image }}" alt="">
-                                                </td>
+                                                
                                                 @can('Subcategory_delete')
                                                   <td>
                                                     <a href="{{ route('subcategory.delete',$subcategor->id) }}" class="btn btn-danger">Delete</a>
@@ -73,11 +70,7 @@
                         <label class="form-label">Subcategory Name</label>
                         <input type="text" name="subcategory_name" class="form-control">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Subcategory Image</label>
-                        <input type="file" name="subcategory_image" class="form-control"  onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
-                        <img src="" width="200" id="blah" alt="">
-                    </div>
+                    
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Add Subcategory</button>
                     </div>

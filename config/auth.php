@@ -40,9 +40,25 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => null,
+        ],
         'coustomer' => [
-            'driver' => 'session',
+            'driver' => 'sanctum',
             'provider' => 'coustomers',
+        ],
+        'reseller' => [
+            'driver' => 'sanctum',
+            'provider' => 'resellers',
+        ],
+        'b2b' => [
+            'driver' => 'sanctum',
+            'provider' => 'b2bs',
+        ],
+        'distributer' => [
+            'driver' => 'sanctum',
+            'provider' => 'distributers',
         ],
     ],
 
@@ -71,6 +87,18 @@ return [
         'coustomers' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Coustomer::class),
+        ],
+        'resellers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Reseller::class,
+        ],
+        'b2bs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\B2b::class,
+        ],
+        'distributers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Distributer::class,
         ],
 
         // 'users' => [

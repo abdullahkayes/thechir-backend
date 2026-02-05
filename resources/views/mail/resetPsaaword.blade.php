@@ -87,7 +87,7 @@
     <div class="email-content">
       <h2>Hello, </h2>
       <p>We received a request to reset your password for your account. If you made this request, please click the button below to reset your password:</p>
-      <a href="http://localhost:5173/#/password/reset/{{ $token }}" class="reset-button">Reset Password</a>
+      <a href="{{ rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/') }}/#/password/reset/{{ $token }}" class="reset-button">Reset Password</a>
       <p>If you didn’t request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
     </div>
     <div class="email-footer">

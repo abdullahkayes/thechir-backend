@@ -16,18 +16,9 @@ function subcategory(){
     return view('backend.subcategory.subcategory',compact('category','subcategory'));
 }
 function subcategory_add(Request $request){
-    $photo =$request->subcategory_image;
-        $extension =$photo->extension();
-        $file_name =uniqid().'.'.$extension;
-  
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($photo);
-        $image->save(public_path('upload/subcategory/'.$file_name));
-
     Subcategory::insert([
       'category_id'=>$request->category_id,
       'subcategory_name'=>$request->subcategory_name,
-      'subcategory_image'=>$file_name,
     ]);
     return back()->with('succ','Subcategory Added Successfull');
 }
@@ -42,7 +33,7 @@ function subcategory_trash(){
 }
 function subcategory_trash_delete($id){
       $subcatgeory=Subcategory::onlyTrashed()->find($id);
-      $delete_form= public_path( 'upload/subcategory/'.$subcatgeory->subcategory_image);
+      $delete_form= public_path( '/upload/subcategory/'.$subcatgeory->subcategory_image);
       unlink($delete_form);
 
    Subcategory::onlyTrashed()->find($id)->forceDelete();

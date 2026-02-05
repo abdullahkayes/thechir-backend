@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
-            $table->integer('coustomer_id');
+            $table->integer('coustomer_id')->nullable();
             $table->integer('sub_total');
             $table->integer('total');
             $table->integer('discount')->nullable();
+            $table->integer('price')->nullable();
             $table->integer('payment_method');
             $table->string('coupon')->nullable();
             $table->timestamps();

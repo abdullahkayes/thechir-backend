@@ -1,0 +1,258 @@
+/**
+ * CRITICAL: Menu Isolation CSS
+ * AGGRESSIVE approach to ensure menus don't interact
+ * Uses !important to override any conflicting styles
+ */
+
+/* ===== UNIVERSAL COLLAPSE ISOLATION ===== */
+
+/* ALL collapse elements start as hidden */
+.collapse {
+  display: none !important;
+  overflow: hidden !important;
+  visibility: visible !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Only show collapse when it has .show class */
+.collapse.show {
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* ===== NAV ITEM ISOLATION ===== */
+
+/* Each nav-item is completely independent */
+.nav-item {
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+}
+
+.nav-item > .collapse {
+  pointer-events: auto !important;
+}
+
+/* ===== NAV LINK ISOLATION ===== */
+
+/* Base nav-link styling - no hover cascade */
+.nav-link {
+  display: block !important;
+  cursor: pointer !important;
+  position: relative !important;
+  user-select: none !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+}
+
+/* Only hover the clicked element */
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Active/Expanded state */
+.nav-link[aria-expanded="true"] {
+  background-color: rgba(63, 81, 181, 0.1) !important;
+  color: #3f51b5 !important;
+}
+
+.nav-link[aria-expanded="false"] {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* ===== PREVENT EVENT PROPAGATION WITH CSS ===== */
+
+/* Stop pointer events from crossing boundaries */
+.nav-item .nav-link {
+  pointer-events: auto !important;
+}
+
+.nav-item .collapse {
+  pointer-events: auto !important;
+}
+
+/* Nested items */
+.nav-item .collapse .nav-link {
+  display: block !important;
+  padding-left: 2rem !important;
+  font-size: 0.875rem !important;
+  color: #575962 !important;
+}
+
+.nav-item .collapse .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  color: #212121 !important;
+}
+
+.nav-item .collapse .nav-link.active {
+  background-color: rgba(63, 81, 181, 0.08) !important;
+  color: #3f51b5 !important;
+  border-left: 3px solid #3f51b5 !important;
+  padding-left: calc(2rem - 3px) !important;
+}
+
+/* ===== PARENT MENU SPECIFIC ISOLATION ===== */
+
+/* Master Data */
+.menu-master-data-parent,
+.menu-product-parent,
+.menu-inventory-parent,
+.menu-purchasing-parent,
+.menu-sales-parent,
+.menu-accounting-parent,
+.menu-category-components-parent,
+.menu-subcategory-parent {
+  pointer-events: auto !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* ===== WEB APPS (NO COLLAPSE) ===== */
+
+.menu-user-list-webapp,
+.menu-coupon-webapp,
+.menu-orders-webapp {
+  pointer-events: auto !important;
+  display: block !important;
+  cursor: pointer !important;
+}
+
+.menu-user-list-webapp:hover,
+.menu-coupon-webapp:hover,
+.menu-orders-webapp:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ===== COMPONENT ITEMS ===== */
+
+.menu-category-add-comp,
+.menu-category-trash-comp,
+.menu-subcategory-add-comp,
+.menu-subcategory-trash-comp {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  display: block !important;
+}
+
+/* ===== LINK ARROWS - NO ROTATION CASCADE ===== */
+
+.link-arrow {
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  transition: transform 0.2s ease !important;
+  pointer-events: none !important;
+}
+
+.nav-link[aria-expanded="true"] .link-arrow {
+  transform: rotate(-180deg) !important;
+}
+
+.nav-link[aria-expanded="false"] .link-arrow {
+  transform: rotate(0deg) !important;
+}
+
+/* ===== SUB-MENU STYLING ===== */
+
+.sub-menu {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0.5rem 0 !important;
+  background-color: transparent !important;
+}
+
+.sub-menu .nav-item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ===== PREVENT SIBLING INTERFERENCE ===== */
+
+/* Ensure siblings don't affect each other */
+.nav-item ~ .nav-item {
+  margin-top: 0 !important;
+}
+
+.nav-item + .nav-item {
+  border-top: none !important;
+}
+
+/* ===== SIDEBAR SPECIFICS ===== */
+
+.sidebar .nav {
+  pointer-events: auto !important;
+}
+
+.sidebar .nav-item {
+  pointer-events: auto !important;
+}
+
+.sidebar .nav-link {
+  pointer-events: auto !important;
+}
+
+/* ===== PREVENT HOVER BLEED ===== */
+
+/* Only apply hover to the specific element being hovered */
+.sidebar .nav-item:hover {
+  /* No background color change on hover - only on the link itself */
+}
+
+.sidebar .nav-item:hover > .nav-link {
+  /* Handled by .nav-link:hover */
+}
+
+/* ===== ICON STYLING ===== */
+
+.link-icon {
+  margin-right: 0.5rem !important;
+  transition: color 0.2s ease !important;
+  pointer-events: none !important;
+}
+
+.link-title {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+@media (max-width: 768px) {
+  .nav-link {
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .nav-item .collapse .nav-link {
+    padding-left: 1.5rem !important;
+  }
+}
+
+/* ===== FORCE COLLAPSE DISPLAY RULES ===== */
+
+/* These rules ensure that ONLY the .show class controls visibility */
+.collapse:not(.show) {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+}
+
+.collapse.show {
+  display: block !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* ===== PREVENT VISIBILITY CASCADE ===== */
+
+/* Explicitly set display none for non-show collapses multiple times */
+.sidebar .collapse:not(.show) {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.sidebar .collapse.show {
+  display: block !important;
+  visibility: visible !important;
+}

@@ -1,0 +1,229 @@
+/**
+ * ERP SYSTEM MENUS - SPECIFIC FIX
+ * Ensures ERP section menus don't have auto-hover or auto-click issues
+ * Prevents text selection and hover cascading
+ */
+
+/* ===== ERP DASHBOARD LINK =====*/
+.nav-item > .nav-link.menu-erp-dashboard {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* ===== ERP COLLAPSIBLE MENUS (Master Data, Inventory, Purchasing, Sales, Accounting) =====*/
+.nav-item > .nav-link.menu-master-data-parent,
+.nav-item > .nav-link.menu-inventory-parent,
+.nav-item > .nav-link.menu-purchasing-parent,
+.nav-item > .nav-link.menu-sales-parent,
+.nav-item > .nav-link.menu-accounting-parent {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  cursor: pointer;
+  pointer-events: auto !important;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== PREVENT HOVERING PARENT FROM AFFECTING COLLAPSE =====*/
+.sidebar .nav-item:has(.menu-master-data-parent) .collapse,
+.sidebar .nav-item:has(.menu-inventory-parent) .collapse,
+.sidebar .nav-item:has(.menu-purchasing-parent) .collapse,
+.sidebar .nav-item:has(.menu-sales-parent) .collapse,
+.sidebar .nav-item:has(.menu-accounting-parent) .collapse {
+  pointer-events: auto !important;
+  z-index: 10;
+}
+
+/* ===== PREVENT SUB-MENU ITEMS FROM INHERITING PARENT HOVER =====*/
+.sidebar .collapse .nav-item {
+  pointer-events: auto !important;
+}
+
+.sidebar .collapse .nav-item .nav-link {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+/* ===== ERP SUBMENU PRODUCTS (nested inside Master Data) =====*/
+.nav-link.menu-product-parent {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+.collapse#forms {
+  pointer-events: auto !important;
+}
+
+.collapse#forms .nav-item {
+  pointer-events: auto !important;
+}
+
+/* ===== ENSURE HOVER ONLY AFFECTS IMMEDIATE ELEMENT =====*/
+.sidebar .nav-item:hover {
+  /* Don't affect children */
+  z-index: 1;
+}
+
+.sidebar .nav-item:hover > .nav-link {
+  /* Only direct child affected */
+  color: #727cf5;
+}
+
+/* ===== PREVENT NESTED COLLAPSE FROM BEING AFFECTED BY PARENT HOVER =====*/
+.sidebar .nav-item:hover .collapse {
+  /* Collapse not affected by parent hover */
+  pointer-events: auto !important;
+}
+
+/* ===== ERP CATEGORY STYLING =====*/
+.nav-item.nav-category {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ===== ENSURE ACTIVE STATE WORKS CORRECTLY =====*/
+.nav-item.active > .nav-link.menu-master-data-parent,
+.nav-item.active > .nav-link.menu-inventory-parent,
+.nav-item.active > .nav-link.menu-purchasing-parent,
+.nav-item.active > .nav-link.menu-sales-parent,
+.nav-item.active > .nav-link.menu-accounting-parent {
+  color: #727cf5;
+  pointer-events: auto;
+}
+
+/* ===== OPEN COLLAPSE STATE =====*/
+.collapse.show {
+  display: block !important;
+  pointer-events: auto !important;
+}
+
+.collapse:not(.show) {
+  display: none !important;
+}
+
+/* ===== SUB-MENU ITEMS IN ERP SECTION =====*/
+#masterData .nav-item,
+#inventory .nav-item,
+#purchasing .nav-item,
+#sales .nav-item,
+#accounting .nav-item {
+  pointer-events: auto !important;
+}
+
+#masterData .nav-link,
+#inventory .nav-link,
+#purchasing .nav-link,
+#sales .nav-link,
+#accounting .nav-link {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  pointer-events: auto !important;
+}
+
+/* ===== NESTED COLLAPSE (Products inside Master Data) =====*/
+#forms {
+  pointer-events: auto !important;
+}
+
+#forms .nav-item {
+  pointer-events: auto !important;
+}
+
+#forms .nav-link {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto !important;
+}
+
+/* ===== PREVENT TEXT SELECTION ON ALL ERP ITEMS =====*/
+.menu-erp-dashboard,
+.menu-master-data,
+.menu-master-data-parent,
+.menu-product,
+.menu-product-parent,
+.menu-product-add,
+.menu-product-list,
+.menu-product-trash,
+.menu-add-color,
+.menu-add-size,
+.menu-brands,
+.menu-categories,
+.menu-categories-masterdata,
+.menu-customers,
+.menu-customers-masterdata,
+.menu-inventory,
+.menu-inventory-parent,
+.menu-stock-status,
+.menu-inventory-add,
+.menu-purchasing,
+.menu-purchasing-parent,
+.menu-purchase-orders,
+.menu-suppliers,
+.menu-sales,
+.menu-sales-parent,
+.menu-order-management,
+.menu-order-management-sales,
+.menu-returns-refunds,
+.menu-accounting,
+.menu-accounting-parent,
+.menu-general-ledger,
+.menu-pl-report,
+.menu-sales-report,
+.menu-inventory-report {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* ===== ENSURE NO UNWANTED STYLING FROM HOVER =====*/
+.sidebar .nav:not(.sub-menu) .nav-item:hover > .nav-link {
+  color: #727cf5;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav:not(.sub-menu) .nav-item:hover > .nav-link .link-icon {
+  color: #727cf5;
+  fill: rgba(239, 243, 255, 0.5);
+}
+
+/* ===== FORCE PROPER DISPLAY FOR DROPDOWN TOGGLES =====*/
+[data-toggle="collapse"] {
+  cursor: pointer !important;
+  user-select: none !important;
+  pointer-events: auto !important;
+}
+
+/* ===== PREVENT BODY SELECTION DURING MENU INTERACTION =====*/
+.sidebar {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ===== ALLOW TEXT SELECTION ONLY WHERE NECESSARY =====*/
+.sidebar .link-title {
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* ===== FINAL SAFEGUARD: OVERRIDE ANY CONFLICTING STYLES =====*/
+.sidebar .nav-item .nav-link {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  cursor: pointer;
+  pointer-events: auto !important;
+}

@@ -23,7 +23,7 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
                  </form>
-               </div>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table table-bodered">
@@ -45,49 +45,56 @@
                         <td>{{ $order->coustomer_id }}</td>
                         <td>{{ $order->total }}</td>
                         <td>{{ $order->coupon }}</td>
-                        <td>{{ $order->created_at->diffForHumans() }}</td>
                         <td>
-                            @if ( $order->status == 0)
-                                <span type="badge" class="badge badge-primary">Placed</span>
-                            @elseif ($order->status == 1)
-                            <span type="badge" class="badge badge-success">Prossesing</span>
-                            @elseif ($order->status == 2)
-                            <span type="badge" class="badge badge-warning">Shiped</span>
-                            @elseif ($order->status == 3)
-                            <span class="badge badge-secondary">Delevired</span>
-                            @elseif ($order->status == 4)
-                            <span type="badge" class="badge badge-danger">Cancel</span>
+                            @if($order->created_at)
+                                {{ $order->created_at->diffForHumans() }}
+                            @else
+                                <span class="text-muted">N/A</span>
                             @endif
                         </td>
-                  <form action="{{ route('status.change',$order->id),  }}" method="POST">
-                    @csrf
                         <td>
-                           <div class="dropdown">
-                               <div class="dropdown">
-  <button class="bg-transparent border-0 dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu">
-   <button type="submit" name="status" value="1" class="dropdown-item">Prossesing</button>
-   <button type="submit" name="status" value="2" class="dropdown-item">Shiped</button>
-   <button type="submit" name="status" value="3" class="dropdown-item">Delevired</button>
-   <button type="submit" name="status" value="4" class="dropdown-item">Cancel</button>
-  </div>
-</div>
+                            @if ( $order->status == 0)
+                                <span class="badge badge-primary">Placed</span>
+                            @elseif ($order->status == 1)
+                            <span class="badge badge-success">Processing</span>
+                            @elseif ($order->status == 2)
+                            <span class="badge badge-warning">Shipped</span>
+                            @elseif ($order->status == 3)
+                            <span class="badge badge-secondary">Delivered</span>
+                            @elseif ($order->status == 4)
+                            <span class="badge badge-danger">Cancelled</span>
+                            @else
+                            <span class="badge badge-light">Unknown</span>
+                            @endif
                         </td>
-                         </form>
-                          <td>
-                            <a target="_blank" href="{{ route('invoice.print', $order->id ) }}" class="btn btn-info">Print</a>
-                            <a href="{{ route('invoice', $order->id ) }}" class="btn btn-success">Download</a>
+                        <td>
+                            <form action="{{ route('status.change', $order->id) }}" method="POST" class="status-form">
+                                @csrf
+                                <div class="dropdown">
+                                    <button class="bg-transparent border-0 dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                        Change Status
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="submit" name="status" value="1" class="dropdown-item status-btn" data-status="1">Processing</button>
+                                        <button type="submit" name="status" value="2" class="dropdown-item status-btn" data-status="2">Shipped</button>
+                                        <button type="submit" name="status" value="3" class="dropdown-item status-btn" data-status="3">Delivered</button>
+                                        <button type="submit" name="status" value="4" class="dropdown-item text-danger status-btn" data-status="4">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                           <td>
+                            <a target="_blank" href="{{ route('invoice.print', $order->order_id ) }}" class="btn btn-info">Print</a>
+                            <a href="{{ route('invoice', $order->order_id ) }}" class="btn btn-success">Download</a>
                         </td>
                        </tr>
                        @empty
                        <tr>
-                        <td colspan="8" class="text-center">
+                        <td colspan="9" class="text-center">
                            No Data Found
                         </td>
                        </tr>
-                    @endforelse
+                    @endforelse 
 
                 </table>
             </div>
@@ -121,7 +128,7 @@
     <div class="col-lg-4 pt-2">
       <div class="card">
             <div class="card-header">
-                <h3>Seles By Month</h3>
+                <h3>Sales By Month</h3>
             </div>
             <div class="card-body">
                    <div>
@@ -186,7 +193,7 @@ const orderData =@json($orderData);
 </script>
 <script>
   const ctx2 = document.getElementById('myChart2');
-const selesData =@json($selesData);
+const salesData =@json($salesData);
 
   new Chart(ctx2, {
     type: 'line',
@@ -194,7 +201,7 @@ const selesData =@json($selesData);
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
       datasets: [{
         label: '# of Orders',
-        data: selesData,
+        data: salesData,
         borderWidth: 1
       }]
     },
@@ -206,6 +213,84 @@ const selesData =@json($selesData);
       }
     }
   });
+</script>
+
+<script>
+// Handle status change form submission
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle all status buttons
+    const statusBtns = document.querySelectorAll('.status-btn');
+    
+    statusBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Get the parent form
+            const form = this.closest('.status-form');
+            if (!form) {
+                console.error('Form not found for status button');
+                return;
+            }
+            
+            // Set the status value in the form
+            let statusInput = form.querySelector('input[name="status"]');
+            if (!statusInput) {
+                // Create hidden input if not exists
+                statusInput = document.createElement('input');
+                statusInput.type = 'hidden';
+                statusInput.name = 'status';
+                form.appendChild(statusInput);
+            }
+            statusInput.value = this.dataset.status;
+            
+            // Close the dropdown manually
+            const dropdown = this.closest('.dropdown');
+            if (dropdown) {
+                dropdown.classList.remove('show');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                if (dropdownMenu) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }
+            
+            // Submit the form
+            form.submit();
+        });
+    });
+    
+    // Check for success/error messages and show alerts
+    @if(session('success'))
+        // Show success toast/alert
+        console.log('Success: {{ session('success') }}');
+        // Optionally show a more visible notification
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        } else {
+            alert('Success: {{ session('success') }}');
+        }
+    @endif
+    
+    @if(session('error'))
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        } else {
+            alert('Error: {{ session('error') }}');
+        }
+    @endif
+});
 </script>
 
 @endsection

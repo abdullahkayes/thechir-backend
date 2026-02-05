@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('billings', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
-            $table->integer('coustomer_id');
+            $table->integer('coustomer_id')->nullable();
             $table->string('name');
             $table->string('company')->nullable();
             $table->string('street');

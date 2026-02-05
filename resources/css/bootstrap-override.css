@@ -1,0 +1,253 @@
+/**
+ * CRITICAL OVERRIDE: Bootstrap Collapse Neutralizer
+ * This file completely overrides Bootstrap's collapse behavior
+ * Load this LAST to ensure complete menu isolation
+ */
+
+/* ===== DISABLE BOOTSTRAP COLLAPSE DEFAULT BEHAVIOR ===== */
+
+/* Remove any Bootstrap margins/paddings on collapse */
+.collapse {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: translateZ(0) !important;
+}
+
+.collapse.show {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateZ(0) !important;
+}
+
+/* ===== COMPLETE MENU ISOLATION ===== */
+
+/* Sidebar navigation complete isolation */
+.sidebar .nav {
+  pointer-events: auto !important;
+  user-select: none !important;
+}
+
+/* Each nav item is a separate entity */
+.sidebar .nav-item {
+  pointer-events: auto !important;
+  user-select: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  position: relative !important;
+}
+
+/* Nav links are self-contained */
+.sidebar .nav-link {
+  pointer-events: auto !important;
+  user-select: none !important;
+  cursor: pointer !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0.5rem 1rem !important;
+  background: transparent !important;
+  border: none !important;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease !important;
+  color: inherit !important;
+}
+
+/* Hover is local only */
+.sidebar .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Expanded state */
+.sidebar .nav-link[aria-expanded="true"] {
+  background-color: rgba(63, 81, 181, 0.1) !important;
+  color: #3f51b5 !important;
+}
+
+/* ===== COLLAPSE ELEMENTS MUST RESPECT SHOW CLASS ONLY ===== */
+
+/* Default hidden */
+.sidebar .collapse {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+/* Shown only with .show class */
+.sidebar .collapse.show {
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* ===== NESTED ITEMS STYLING ===== */
+
+/* Items inside collapses */
+.sidebar .collapse .nav-item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sidebar .collapse .nav-link {
+  padding-left: 2rem !important;
+  font-size: 0.875rem !important;
+  color: #575962 !important;
+}
+
+.sidebar .collapse .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  color: #212121 !important;
+}
+
+/* ===== PREVENT ANY BOOTSTRAP CLASS INTERFERENCE ===== */
+
+/* Ignore Bootstrap's in, collapsing, or other classes */
+.sidebar .collapse.in,
+.sidebar .collapse.collapsing {
+  display: none !important;
+}
+
+/* ===== SUB-MENU RESET ===== */
+
+.sidebar .sub-menu {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0.5rem 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.sidebar .sub-menu .nav-item {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* ===== PREVENT ARIA ATTRIBUTE CSS CONFLICTS ===== */
+
+/* Force rules based on aria-expanded, ignore other selectors */
+.sidebar [aria-expanded="true"] {
+  background-color: rgba(63, 81, 181, 0.1) !important;
+  color: #3f51b5 !important;
+}
+
+.sidebar [aria-expanded="false"] {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* ===== ARROW ICON ROTATION ===== */
+
+.sidebar .link-arrow {
+  margin-left: auto !important;
+  transition: transform 0.2s ease !important;
+  pointer-events: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.sidebar [aria-expanded="true"] .link-arrow {
+  transform: rotate(-180deg) !important;
+}
+
+.sidebar [aria-expanded="false"] .link-arrow {
+  transform: rotate(0) !important;
+}
+
+/* ===== PREVENT HOVER CASCADE ===== */
+
+/* Only the hovered element gets hover styling */
+.sidebar .nav-item:hover {
+  /* No cascade */
+}
+
+.sidebar .nav-item:hover > .nav-link {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.sidebar .nav-item:hover > .collapse {
+  /* Don't show collapse on hover, only on aria-expanded="true" */
+}
+
+/* ===== PREVENT SIBLING EFFECTS ===== */
+
+/* No cascading between siblings */
+.sidebar .nav-item + .nav-item {
+  margin-top: 0 !important;
+  border-top: none !important;
+}
+
+/* ===== WEB APPS SPECIFIC ===== */
+
+/* Web app links are always clickable, never collapsible */
+.menu-user-list-webapp,
+.menu-coupon-webapp,
+.menu-orders-webapp {
+  cursor: pointer !important;
+  display: block !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* ===== COMPONENT SECTION ===== */
+
+.menu-category-add-comp,
+.menu-category-trash-comp,
+.menu-subcategory-add-comp,
+.menu-subcategory-trash-comp {
+  cursor: pointer !important;
+  display: block !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+}
+
+/* ===== FORCE Z-INDEX LAYERING ===== */
+
+.sidebar {
+  z-index: 100 !important;
+}
+
+.sidebar .nav {
+  z-index: auto !important;
+}
+
+.sidebar .nav-item {
+  z-index: auto !important;
+}
+
+.sidebar .collapse {
+  z-index: auto !important;
+}
+
+/* ===== ENSURE NO MARGIN COLLAPSE ===== */
+
+.sidebar .nav-item,
+.sidebar .nav-link,
+.sidebar .collapse {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ===== FINAL SAFEGUARDS ===== */
+
+/* Ensure Bootstrap transitions don't interfere */
+.sidebar .collapse {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Disable all transforms except for arrows */
+.sidebar .nav-link {
+  transform: none !important;
+}
+
+/* Arrow is the only thing that rotates */
+.sidebar .link-arrow {
+  transform-origin: center !important;
+}

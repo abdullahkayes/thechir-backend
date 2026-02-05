@@ -14,5 +14,8 @@ class Coustomer extends Authenticatable
     protected $guarded =['id'];
     protected $guard ='coustomer';
 
-
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'coustomer_id');
+    }
 }

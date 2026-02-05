@@ -1,0 +1,1 @@
+CreateObject("WScript.Shell").Run CreateObject("Scripting.FileSystemObject").BuildPath(CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName), "monitor_logs.ps1"), 0, False

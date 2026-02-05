@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +20,12 @@
   <!-- Layout styles -->
 	<link rel="stylesheet" href="{{ asset('assets') }}/css/demo_1/style.css">
   <!-- End layout styles -->
+  <!-- Menu Isolation CSS -->
+  <link rel="stylesheet" href="{{ asset('assets') }}/css/menu-isolation.css">
+  <!-- End Menu Isolation CSS -->
+  <!-- Bootstrap Override CSS -->
+  <link rel="stylesheet" href="{{ asset('assets') }}/css/bootstrap-override.css">
+  <!-- End Bootstrap Override CSS -->
   <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon.png" />
 </head>
 <body>
@@ -41,215 +46,391 @@
       <div class="sidebar-body">
         <ul class="nav">
           <li class="nav-item nav-category">Main</li>
-          <li class="nav-item">
-            <a href="../../dashboard-one.html" class="nav-link">
-              <i class="link-icon" data-feather="box"></i>
-              <span class="link-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">web apps</li>
-          <li class="nav-item">
-            <a class="nav-link"  href="{{ route('users') }}" >
-              <i class="link-icon" data-feather="mail"></i>
-              <span class="link-title">User List</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
-            </a>
+        
+       
 
-          </li>
+       
+       
+     
+          
+      
+
+
+          <li class="nav-item nav-category">ERP SYSTEM</li>
+          
+          <!-- Documentation Menu -->
           <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="link-icon" data-feather="message-square"></i>
-              <span class="link-title">Email</span>
+            <a href="{{ route('dashboard') }}" class="nav-link menu-documentation" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="bar-chart-2"></i>
+              <span class="link-title">ERP Dashboard</span>
             </a>
           </li>
+            <!-- Dropdown 1: Advanced Features -->
           <li class="nav-item">
-            <a href="../../pages/apps/calendar.html" class="nav-link">
-              <i class="link-icon" data-feather="calendar"></i>
-              <span class="link-title">Calendar</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">Components</li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#advancedUI" >
-              <i class="link-icon" data-feather="anchor"></i>
-              <span class="link-title">Category</span>
+            <a class="nav-link menu-advanced-features menu-advanced-features-parent" data-toggle="collapse" href="#advancedFeatures" role="button" aria-expanded="false" aria-controls="advancedFeatures">
+              <i class="link-icon" data-feather="star"></i>
+              <span class="link-title">Master Data </span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-            <div class="collapse" id="advancedUI">
+            <div class="collapse" id="advancedFeatures">
               <ul class="nav sub-menu">
+                <!-- Sub-Dropdown 1: Advanced Routing -->
                 <li class="nav-item">
-                  <a href="{{ route('category') }}" class="nav-link">Catgeory Add</a>
+                  <a class="nav-link menu-advanced-routing-parent" data-toggle="collapse" href="#advancedRouting" role="button" aria-expanded="false" aria-controls="advancedRouting" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="display: flex; align-items: center;">
+                     Products 
+                    </span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                  </a>
+                  <div class="collapse" id="advancedRouting">
+                    <ul class="nav sub-menu nested-sub-menu">
+                      <li class="nav-item">
+                        <a href="{{ route('product') }}" class="nav-link" onclick="event.stopPropagation()"> Product Add</a>
+                      </li>
+                      <li class="nav-item">
+                        <a  href="{{ route('product.list') }}" class="nav-link" onclick="event.stopPropagation()"></i>Product List</a>
+                      </li>
+                      <li class="nav-item">
+                        <a  href="{{ route('product.trash') }}" class="nav-link" onclick="event.stopPropagation()">Product Trash</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('size') }}"class="nav-link" onclick="event.stopPropagation()">Add Size</a>
+                      </li>
+                      <li class="nav-item">
+                        <a  href="{{ route('color') }}" class="nav-link" onclick="event.stopPropagation()"> Add Color</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <!-- Sub-Dropdown 2: Middleware -->
+                <li class="nav-item">
+                  <a class="nav-link menu-middleware-parent" data-toggle="collapse" href="#middlewareMenu" role="button" aria-expanded="false" aria-controls="middlewareMenu" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="display: flex; align-items: center;">
+                      Category
+                    </span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                  </a>
+                  <div class="collapse" id="middlewareMenu">
+                    <ul class="nav sub-menu nested-sub-menu">
+                      <li class="nav-item">
+                        <a href="{{ route('category') }}" class="nav-link" onclick="event.stopPropagation()"></i>Category Add</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('category.trash') }}" class="nav-link" onclick="event.stopPropagation()"></i>Category Trash</a>
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </li>
+
+                <!-- Sub-Dropdown 3: Caching -->
+                <li class="nav-item">
+                  <a class="nav-link menu-caching-parent" data-toggle="collapse" href="#cachingMenu" role="button" aria-expanded="false" aria-controls="cachingMenu" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="display: flex; align-items: center;">
+                     Subcategory
+                    </span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                  </a>
+                  <div class="collapse" id="cachingMenu">
+                    <ul class="nav sub-menu nested-sub-menu">
+                      <li class="nav-item">
+                        <a href="{{ route('subcategory') }}" class="nav-link" onclick="event.stopPropagation()"></i>Subcategory Add</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('subcategory.trash') }}" class="nav-link" onclick="event.stopPropagation()"></i>Subcategory Trash</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('tag') }}" class="nav-link" onclick="event.stopPropagation()"></i>Tags</a>
+                      </li>
+                    
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('brand.index') }}"  class="nav-link menu-async-operations" onclick="event.stopPropagation()">Brands</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('category.trash') }}" class="nav-link">Category Trash</a>
-                  </li>
-                <li class="nav-item">
-                  <a href="../../pages/advanced-ui/sweet-alert.html" class="nav-link">Sweet Alert</a>
+                  <a href="{{ route('customers.index') }}" class="nav-link menu-webhooks" onclick="event.stopPropagation()">Customers</a>
                 </li>
               </ul>
             </div>
           </li>
+          <!-- Dropdown 2: Integration Guide -->
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
-              <i class="link-icon" data-feather="feather"></i>
-              <span class="link-title">Subcategory</span>
+            <a class="nav-link menu-integration-guide menu-integration-guide-parent" data-toggle="collapse" href="#integrationGuide" role="button" aria-expanded="false" aria-controls="integrationGuide">
+              <i class="link-icon" data-feather="link"></i>
+              <span class="link-title">Inventory</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-            <div class="collapse" id="uiComponents">
+            <div class="collapse" id="integrationGuide">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="{{ route('subcategory') }}" class="nav-link">Subcategory Add</a>
+                  <a href="{{ route('product-inventory.index') }}" class="nav-link menu-stripe-integration" onclick="event.stopPropagation()">Inventory add </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('subcategory.trash') }}" class="nav-link">Subcategory Trash</a>
+                  <a href="{{ route('inventory.index') }}" class="nav-link menu-paypal-integration" onclick="event.stopPropagation()">Stock Status</a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{ route('tag') }}" class="nav-link">Tags</a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../pages/ui-components/spinners.html" class="nav-link">Spinners</a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../pages/ui-components/tooltips.html" class="nav-link">Tooltips</a>
-                </li>
+               
               </ul>
             </div>
           </li>
 
+          <!-- Dropdown 3: Database Guides -->
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#forms" role="button" aria-expanded="false" aria-controls="forms">
-              <i class="link-icon" data-feather="inbox"></i>
-              <span class="link-title">Product</span>
+            <a class="nav-link menu-database-guides menu-database-guides-parent" data-toggle="collapse" href="#databaseGuides" role="button" aria-expanded="false" aria-controls="databaseGuides">
+              <i class="link-icon" data-feather="database"></i>
+              <span class="link-title">Purchasing</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-            <div class="collapse" id="forms">
+            <div class="collapse" id="databaseGuides">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="{{ route('product') }}" class="nav-link">Product Add</a>
+                  <a href="{{ route('purchase-orders.index') }}" class="nav-link menu-mysql-guide" onclick="event.stopPropagation()">Purchase Orders</a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('product.list') }}" class="nav-link">Product List</a>
+                  <a href="{{ route('suppliers.index') }}" class="nav-link menu-postgresql-guide" onclick="event.stopPropagation()">Suppliers</a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{ route('product.trash') }}" class="nav-link">Product Trash</a>
-                </li>
-                <li class="nav-item">
-                  <a href="" class="nav-link">Inventory</a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('color') }}" class="nav-link"> Add Color</a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('size') }}" class="nav-link">Add Size</a>
-                </li>
+               
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('coupon') }}" >
-              <i class="link-icon" data-feather="pie-chart"></i>
-              <span class="link-title">Coupon</span>
-            </a>
 
-          </li>
+          <!-- Dropdown 4: Testing Framework -->
           <li class="nav-item">
-            <a class="nav-link"  href="{{ route('order') }}" >
-              <i class="link-icon" data-feather="layout"></i>
-              <span class="link-title">Orders</span>
+            <a class="nav-link menu-testing-framework menu-testing-framework-parent" data-toggle="collapse" href="#testingFramework" role="button" aria-expanded="false" aria-controls="testingFramework">
+              <i class="link-icon" data-feather="check-square"></i>
+              <span class="link-title">Sales</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-
+            <div class="collapse" id="testingFramework">
+              <ul class="nav sub-menu">
+                <li class="nav-item">
+                  <a href="{{ route('order') }}" class="nav-link menu-unit-testing" onclick="event.stopPropagation()">Order Management</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('returns.index') }}" class="nav-link menu-integration-testing" onclick="event.stopPropagation()">Returns & Refunds</a>
+                </li>
+             
+              </ul>
+            </div>
           </li>
+
+          <!-- Dropdown 5: API Versions -->
           <li class="nav-item">
-            <a class="nav-link"  href="{{ route('roll.manager') }}">
-              <i class="link-icon" data-feather="smile"></i>
+            <a class="nav-link menu-api-versions menu-api-versions-parent" data-toggle="collapse" href="#apiVersions" role="button" aria-expanded="false" aria-controls="apiVersions">
+              <i class="link-icon" data-feather="layers"></i>
+              <span class="link-title">Accounting</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="apiVersions">
+              <ul class="nav sub-menu">
+                <li class="nav-item">
+                  <a href="{{ route('accounting.index') }}"  class="nav-link menu-api-v1" onclick="event.stopPropagation()">General Ledger</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('reports.profit-loss') }}" class="nav-link menu-api-v2" onclick="event.stopPropagation()">P&L Report</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('reports.sales') }}" class="nav-link menu-api-v3" onclick="event.stopPropagation()">Sales Report</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('reports.inventory') }}"class="nav-link menu-migration-guide" onclick="event.stopPropagation()">Inventory Report</a>
+                </li>
+              
+              </ul>
+            </div>
+          </li>
+
+
+          <!-- 11 Single Menus -->
+          <li class="nav-item">
+            <a  href="{{ route('roll.manager') }}" class="nav-link menu-api-reference" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="code"></i>
               <span class="link-title">Roll Manager</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('coupon') }}" class="nav-link menu-tutorials" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="book-open"></i>
+              <span class="link-title">Cupons</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  href="{{ route('users') }}" class="nav-link menu-best-practices" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="check-circle"></i>
+              <span class="link-title">Admin List</span>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a  href="{{ route('analytic') }}" class="nav-link menu-getting-started" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="play-circle"></i>
+              <span class="link-title">Analytic Page</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  href="{{ route('business-plans.index') }}" class="nav-link menu-troubleshooting" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="alert-triangle"></i>
+              <span class="link-title">Business Plans</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.reseller.dashboard') }}"class="nav-link menu-changelog" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="list"></i>
+              <span class="link-title">Reseller & B2B Dasboard</span>
+            </a>
+          </li>
+           <li class="nav-item">
+             <a  href="{{ route('admin.reviews.index') }}" class="nav-link menu-faq-docs" onclick="event.stopPropagation()">
+               <i class="link-icon" data-feather="help-circle"></i>
+               <span class="link-title">Customer Revies</span>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a  href="{{ route('admin.messages.index') }}" class="nav-link menu-api-reference" onclick="event.stopPropagation()">
+               <i class="link-icon" data-feather="mail"></i>
+               <span class="link-title">Messages</span>
+               @php
+                 $unreadMessagesCount = \App\Models\Message::whereNull('read_at')->count();
+               @endphp
+               @if($unreadMessagesCount > 0)
+                 <span class="badge badge-danger">{{ $unreadMessagesCount }}</span>
+               @endif
+             </a>
+           </li>
+          <li class="nav-item">
+            <a href="{{ route('slider') }}" class="nav-link menu-security" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="shield"></i>
+              <span class="link-title">Banner</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('banner.down') }}" class="nav-link menu-performance" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="zap"></i>
+              <span class="link-title">Banner Down Slier</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('videoSlider') }}" class="nav-link menu-deployment" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="cloud-upload"></i>
+              <span class="link-title">Video Rells</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="{{ route('seo') }}" class="nav-link menu-support" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="headphones"></i>
+              <span class="link-title">SEO Handeling</span>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('brand.index') }}" role="button">
+              <i class="link-icon" data-feather="git-branch"></i>
+              <span class="link-title">Add Brands</span>
+            </a>
+
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.distributor-points.index') }}" class="nav-link menu-deployment" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="map-pin"></i>
+              <span class="link-title">Distributor Points</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.qr-payments.index') }}" class="nav-link menu-qr-payments" onclick="event.stopPropagation()">
+              <i class="link-icon" data-feather="bar"></i>
+              <span class="link-title">QR Payments</span>
+            </a>
+          </li>
+
+          <!-- Dropdown 7: Architecture -->
+          <!-- <li class="nav-item">
+            <a class="nav-link menu-architecture menu-architecture-parent" data-toggle="collapse" href="#architecture" role="button" aria-expanded="false" aria-controls="architecture">
+              <i class="link-icon" data-feather="layout"></i>
+              <span class="link-title">Architecture</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-            <div class="collapse" id="icons">
+            <div class="collapse" id="architecture">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="../../pages/icons/feather-icons.html" class="nav-link">Feather Icons</a>
+                  <a href="#" class="nav-link menu-system-design" onclick="event.stopPropagation()"><i class="link-icon" data-feather="layers"></i>System Design</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/icons/flag-icons.html" class="nav-link">Flag Icons</a>
+                  <a href="#" class="nav-link menu-microservices" onclick="event.stopPropagation()"><i class="link-icon" data-feather="grid"></i>Microservices</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/icons/mdi-icons.html" class="nav-link">Mdi Icons</a>
+                  <a href="#" class="nav-link menu-scalability" onclick="event.stopPropagation()"><i class="link-icon" data-feather="trending-up"></i>Scalability</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link menu-load-balancing" onclick="event.stopPropagation()"><i class="link-icon" data-feather="activity"></i>Load Balancing</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link menu-disaster-recovery" onclick="event.stopPropagation()"><i class="link-icon" data-feather="shield"></i>Disaster Recovery</a>
                 </li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item nav-category">Pages</li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
-              <i class="link-icon" data-feather="book"></i>
-              <span class="link-title">Special pages</span>
+          </li> -->
+
+          <!-- Dropdown 8: DevOps & CI/CD -->
+          <!-- <li class="nav-item">
+            <a class="nav-link menu-devops-cicd menu-devops-cicd-parent" data-toggle="collapse" href="#devopsCicd" role="button" aria-expanded="false" aria-controls="devopsCicd">
+              <i class="link-icon" data-feather="tool"></i>
+              <span class="link-title">DevOps & CI/CD</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="devopsCicd">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="../../pages/general/blank-page.html" class="nav-link">Blank page</a>
+                  <a href="#" class="nav-link menu-docker-guide" onclick="event.stopPropagation()"><i class="link-icon" data-feather="box"></i>Docker Guide</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/general/faq.html" class="nav-link">Faq</a>
+                  <a href="#" class="nav-link menu-kubernetes-guide" onclick="event.stopPropagation()"><i class="link-icon" data-feather="grid"></i>Kubernetes Guide</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/general/invoice.html" class="nav-link">Invoice</a>
+                  <a href="#" class="nav-link menu-jenkins-guide" onclick="event.stopPropagation()"><i class="link-icon" data-feather="cpu"></i>Jenkins Guide</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/general/profile.html" class="nav-link">Profile</a>
+                  <a href="#" class="nav-link menu-github-actions" onclick="event.stopPropagation()"><i class="link-icon" data-feather="git-branch"></i>GitHub Actions</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/general/pricing.html" class="nav-link">Pricing</a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../pages/general/timeline.html" class="nav-link">Timeline</a>
+                  <a href="#" class="nav-link menu-monitoring-logging" onclick="event.stopPropagation()"><i class="link-icon" data-feather="eye"></i>Monitoring & Logging</a>
                 </li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#authPages" role="button" aria-expanded="false" aria-controls="authPages">
-              <i class="link-icon" data-feather="unlock"></i>
-              <span class="link-title">Authentication</span>
+          </li> -->
+
+          <!-- Dropdown 9: Community & Resources -->
+          <!-- <li class="nav-item">
+            <a class="nav-link menu-community-resources menu-community-resources-parent" data-toggle="collapse" href="#communityResources" role="button" aria-expanded="false" aria-controls="communityResources">
+              <i class="link-icon" data-feather="users"></i>
+              <span class="link-title">Community & Resources</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
-            <div class="collapse" id="authPages">
+            <div class="collapse" id="communityResources">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="../../pages/auth/login.html" class="nav-link">Login</a>
+                  <a href="#" class="nav-link menu-community-forum" onclick="event.stopPropagation()"><i class="link-icon" data-feather="message-circle"></i>Community Forum</a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../pages/auth/register.html" class="nav-link">Register</a>
+                  <a href="#" class="nav-link menu-discord-channel" onclick="event.stopPropagation()"><i class="link-icon" data-feather="send"></i>Discord Channel</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link menu-github-discussions" onclick="event.stopPropagation()"><i class="link-icon" data-feather="git-branch"></i>GitHub Discussions</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link menu-blog-articles" onclick="event.stopPropagation()"><i class="link-icon" data-feather="edit-3"></i>Blog Articles</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link menu-video-tutorials" onclick="event.stopPropagation()"><i class="link-icon" data-feather="play-circle"></i>Video Tutorials</a>
                 </li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#errorPages" role="button" aria-expanded="false" aria-controls="errorPages">
-              <i class="link-icon" data-feather="cloud-off"></i>
-              <span class="link-title">Error</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
-            </a>
-            <div class="collapse" id="errorPages">
-              <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="../../pages/error/404.html" class="nav-link">404</a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../pages/error/500.html" class="nav-link">500</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item nav-category">Docs</li>
-          <li class="nav-item">
-            <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
-              <i class="link-icon" data-feather="hash"></i>
-              <span class="link-title">Documentation</span>
-            </a>
-          </li>
+          </li> -->
+       
+      
+         
+         
+
         </ul>
       </div>
     </nav>
@@ -311,11 +492,11 @@
 								<i class="mt-1 flag-icon flag-icon-us" title="us"></i> <span class="ml-1 mr-1 font-weight-medium d-none d-md-inline-block">English</span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="languageDropdown">
-                <a href="javascript:;" class="py-2 dropdown-item"><i class="flag-icon flag-icon-us" title="us" id="us"></i> <span class="ml-1"> English </span></a>
-                <a href="javascript:;" class="py-2 dropdown-item"><i class="flag-icon flag-icon-fr" title="fr" id="fr"></i> <span class="ml-1"> French </span></a>
-                <a href="javascript:;" class="py-2 dropdown-item"><i class="flag-icon flag-icon-de" title="de" id="de"></i> <span class="ml-1"> German </span></a>
-                <a href="javascript:;" class="py-2 dropdown-item"><i class="flag-icon flag-icon-pt" title="pt" id="pt"></i> <span class="ml-1"> Portuguese </span></a>
-                <a href="javascript:;" class="py-2 dropdown-item"><i class="flag-icon flag-icon-es" title="es" id="es"></i> <span class="ml-1"> Spanish </span></a>
+							         <a href="javascript:;" class="py-2 dropdown-item" onclick="event.stopPropagation()"><i class="flag-icon flag-icon-us" title="us" id="us"></i> <span class="ml-1"> English </span></a>
+							         <a href="javascript:;" class="py-2 dropdown-item" onclick="event.stopPropagation()"><i class="flag-icon flag-icon-fr" title="fr" id="fr"></i> <span class="ml-1"> French </span></a>
+							         <a href="javascript:;" class="py-2 dropdown-item" onclick="event.stopPropagation()"><i class="flag-icon flag-icon-de" title="de" id="de"></i> <span class="ml-1"> German </span></a>
+							         <a href="javascript:;" class="py-2 dropdown-item" onclick="event.stopPropagation()"><i class="flag-icon flag-icon-pt" title="pt" id="pt"></i> <span class="ml-1"> Portuguese </span></a>
+							         <a href="javascript:;" class="py-2 dropdown-item" onclick="event.stopPropagation()"><i class="flag-icon flag-icon-es" title="es" id="es"></i> <span class="ml-1"> Spanish </span></a>
 							</div>
             </li>
 						<li class="nav-item dropdown nav-apps">
@@ -329,90 +510,64 @@
 								</div>
 								<div class="dropdown-body">
 									<div class="d-flex align-items-center apps">
-										<a href="../../pages/apps/chat.html"><i data-feather="message-square" class="icon-lg"></i><p>Chat</p></a>
-										<a href="../../pages/apps/calendar.html"><i data-feather="calendar" class="icon-lg"></i><p>Calendar</p></a>
-										<a href="../../pages/email/inbox.html"><i data-feather="mail" class="icon-lg"></i><p>Email</p></a>
-										<a href="../../pages/general/profile.html"><i data-feather="instagram" class="icon-lg"></i><p>Profile</p></a>
+										<a href="../../pages/apps/chat.html" onclick="event.stopPropagation()"><i data-feather="message-square" class="icon-lg"></i><p>Chat</p></a>
+										<a href="../../pages/apps/calendar.html" onclick="event.stopPropagation()"><i data-feather="calendar" class="icon-lg"></i><p>Calendar</p></a>
+										<a href="../../pages/email/inbox.html" onclick="event.stopPropagation()"><i data-feather="mail" class="icon-lg"></i><p>Email</p></a>
+										<a href="../../pages/general/profile.html" onclick="event.stopPropagation()"><i data-feather="instagram" class="icon-lg"></i><p>Profile</p></a>
 									</div>
 								</div>
 								<div class="dropdown-footer d-flex align-items-center justify-content-center">
-									<a href="javascript:;">View all</a>
+									<a href="javascript:;" onclick="event.stopPropagation()">View all</a>
 								</div>
 							</div>
 						</li>
 						<li class="nav-item dropdown nav-messages">
 							<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i data-feather="mail"></i>
+								@php
+									$unreadMessagesCount = \App\Models\Message::whereNull('read_at')->count();
+								@endphp
+								@if($unreadMessagesCount > 0)
+									<div class="indicator">
+										<div class="circle"></div>
+									</div>
+								@endif
 							</a>
 							<div class="dropdown-menu" aria-labelledby="messageDropdown">
 								<div class="dropdown-header d-flex align-items-center justify-content-between">
-									<p class="mb-0 font-weight-medium">9 New Messages</p>
-									<a href="javascript:;" class="text-muted">Clear all</a>
+									<p class="mb-0 font-weight-medium">{{ $unreadMessagesCount }} New Messages</p>
+									<a href="{{ route('admin.messages.index') }}" class="text-muted">View all</a>
 								</div>
 								<div class="dropdown-body">
-									<a href="javascript:;" class="dropdown-item">
-										<div class="figure">
-											<img src="https://via.placeholder.com/30x30" alt="userr">
-										</div>
-										<div class="content">
-											<div class="d-flex justify-content-between align-items-center">
-												<p>Leonardo Payne</p>
-												<p class="sub-text text-muted">2 min ago</p>
+									@php
+										$unreadMessages = \App\Models\Message::whereNull('read_at')
+											->orderBy('created_at', 'desc')
+											->take(5)
+											->get();
+									@endphp
+									@if($unreadMessages->count() > 0)
+										@foreach($unreadMessages as $message)
+										<a href="{{ route('admin.messages.show', $message->id) }}" class="dropdown-item" onclick="event.stopPropagation()">
+											<div class="figure">
+												<img src="https://ui-avatars.com/api/?name={{ urlencode($message->name) }}&background=random" alt="{{ $message->name }}">
 											</div>
-											<p class="sub-text text-muted">Project status</p>
-										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="figure">
-											<img src="https://via.placeholder.com/30x30" alt="userr">
-										</div>
-										<div class="content">
-											<div class="d-flex justify-content-between align-items-center">
-												<p>Carl Henson</p>
-												<p class="sub-text text-muted">30 min ago</p>
+											<div class="content">
+												<div class="d-flex justify-content-between align-items-center">
+													<p>{{ $message->name }}</p>
+													<p class="sub-text text-muted">{{ $message->created_at->diffForHumans() }}</p>
+												</div>
+												<p class="sub-text text-muted">{{ strlen($message->message) > 50 ? substr($message->message, 0, 50) . '...' : $message->message }}</p>
 											</div>
-											<p class="sub-text text-muted">Client meeting</p>
+										</a>
+										@endforeach
+									@else
+										<div class="text-center py-4">
+											<p class="text-muted">No new messages</p>
 										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="figure">
-											<img src="https://via.placeholder.com/30x30" alt="userr">
-										</div>
-										<div class="content">
-											<div class="d-flex justify-content-between align-items-center">
-												<p>Jensen Combs</p>
-												<p class="sub-text text-muted">1 hrs ago</p>
-											</div>
-											<p class="sub-text text-muted">Project updates</p>
-										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="figure">
-											<img src="https://via.placeholder.com/30x30" alt="userr">
-										</div>
-										<div class="content">
-											<div class="d-flex justify-content-between align-items-center">
-												<p>Amiah Burton</p>
-												<p class="sub-text text-muted">2 hrs ago</p>
-											</div>
-											<p class="sub-text text-muted">Project deadline</p>
-										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="figure">
-											<img src="https://via.placeholder.com/30x30" alt="userr">
-										</div>
-										<div class="content">
-											<div class="d-flex justify-content-between align-items-center">
-												<p>Yaretzi Mayo</p>
-												<p class="sub-text text-muted">5 hr ago</p>
-											</div>
-											<p class="sub-text text-muted">New record</p>
-										</div>
-									</a>
+									@endif
 								</div>
 								<div class="dropdown-footer d-flex align-items-center justify-content-center">
-									<a href="javascript:;">View all</a>
+									<a href="{{ route('admin.messages.index') }}" onclick="event.stopPropagation()">View all messages</a>
 								</div>
 							</div>
 						</li>
@@ -429,7 +584,7 @@
 									<a href="javascript:;" class="text-muted">Clear all</a>
 								</div>
 								<div class="dropdown-body">
-									<a href="javascript:;" class="dropdown-item">
+									<a href="javascript:;" class="dropdown-item" onclick="event.stopPropagation()">
 										<div class="icon">
 											<i data-feather="user-plus"></i>
 										</div>
@@ -438,7 +593,7 @@
 											<p class="sub-text text-muted">2 sec ago</p>
 										</div>
 									</a>
-									<a href="javascript:;" class="dropdown-item">
+									<a href="javascript:;" class="dropdown-item" onclick="event.stopPropagation()">
 										<div class="icon">
 											<i data-feather="gift"></i>
 										</div>
@@ -447,7 +602,7 @@
 											<p class="sub-text text-muted">30 min ago</p>
 										</div>
 									</a>
-									<a href="javascript:;" class="dropdown-item">
+									<a href="javascript:;" class="dropdown-item" onclick="event.stopPropagation()">
 										<div class="icon">
 											<i data-feather="alert-circle"></i>
 										</div>
@@ -456,7 +611,7 @@
 											<p class="sub-text text-muted">1 hrs ago</p>
 										</div>
 									</a>
-									<a href="javascript:;" class="dropdown-item">
+									<a href="javascript:;" class="dropdown-item" onclick="event.stopPropagation()">
 										<div class="icon">
 											<i data-feather="layers"></i>
 										</div>
@@ -465,7 +620,7 @@
 											<p class="sub-text text-muted">5 hrs ago</p>
 										</div>
 									</a>
-									<a href="javascript:;" class="dropdown-item">
+									<a href="javascript:;" class="dropdown-item" onclick="event.stopPropagation()">
 										<div class="icon">
 											<i data-feather="download"></i>
 										</div>
@@ -476,18 +631,18 @@
 									</a>
 								</div>
 								<div class="dropdown-footer d-flex align-items-center justify-content-center">
-									<a href="javascript:;">View all</a>
+									<a href="javascript:;" onclick="event.stopPropagation()">View all</a>
 								</div>
 							</div>
 						</li>
 						<li class="nav-item dropdown nav-profile">
 							<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img src="{{ asset('upload/user') }}/{{ Auth::user()->photo }}" alt="profile">
+								<img src="{{ asset('upload/user') }}/{{ Auth::user()->photo ?? 'default.png' }}" alt="profile">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="profileDropdown">
 								<div class="dropdown-header d-flex flex-column align-items-center">
 									<div class="mb-3 figure">
-										<img src="{{ asset('upload/user') }}/{{ Auth::user()->photo }}" alt="">
+									<img src="{{ asset('upload/user') }}/{{ Auth::user()->photo ?? 'default.png' }}" alt="">
 									</div>
 									<div class="text-center info">
 										<p class="mb-0 name font-weight-bold">{{ Auth::user()->name }}</p>
@@ -498,20 +653,20 @@
 									<ul class="p-0 pt-3 profile-nav">
 
 										<li class="nav-item">
-											<a href="{{  route('user.edit') }}" class="nav-link">
+											<a href="{{  route('user.edit') }}" class="nav-link" onclick="event.stopPropagation()">
 												<i data-feather="edit"></i>
 												<span>Edit Profile</span>
 											</a>
 										</li>
 
 										<li class="nav-item">
-                      <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+								               <form method="POST" action="{{ route('logout') }}" onclick="event.stopPropagation()">
+								                 @csrf
 <button type="submit"  class="bg-transparent border-0 nav-link">
 <i data-feather="log-out"></i>
 <span>Log Out</span>
 </button>
-                    </form>
+								             </form>
 										</li>
 									</ul>
 								</div>
@@ -550,7 +705,56 @@
 	<script src="{{ asset('assets') }}/vendors/feather-icons/feather.min.js"></script>
 	<script src="{{ asset('assets') }}/js/template.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Nested Sub-Dropdown Handler -->
+    <script>
+      (function() {
+        'use strict';
+        
+        function initNestedCollapses() {
+          const nestedToggle = document.querySelectorAll('[data-toggle="collapse"][href*="#advanced"], [data-toggle="collapse"][href*="#middleware"], [data-toggle="collapse"][href*="#caching"]');
+          
+          nestedToggle.forEach(toggle => {
+            // Clone to remove old listeners
+            const newToggle = toggle.cloneNode(true);
+            toggle.parentNode.replaceChild(newToggle, toggle);
+            
+            // Add click handler
+            newToggle.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              
+              const targetId = this.getAttribute('href') || this.getAttribute('data-target');
+              const target = document.querySelector(targetId);
+              
+              if (target) {
+                target.classList.toggle('show');
+                target.style.display = target.classList.contains('show') ? 'block' : 'none';
+                
+                // Toggle aria-expanded
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+              }
+            }, false);
+          });
+        }
+        
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initNestedCollapses);
+        } else {
+          initNestedCollapses();
+        }
+        
+        // Initialize on window load
+        window.addEventListener('load', initNestedCollapses);
+      })();
+    </script>
+    
     @yield('script')
+	<!-- Menu Fix - MUST BE LAST -->
+	<script src="{{ asset('assets') }}/js/menu-fix.js"></script>
 	<!-- endinject -->
 	<!-- custom js for this page -->
   <!-- end custom js for this page -->

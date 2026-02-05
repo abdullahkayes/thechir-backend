@@ -1,0 +1,78 @@
+﻿[
+    {
+        "id": 23,
+        "name": "CeraVe Lotion",
+        "colors": [
+            {
+                "id": 8,
+                "name": null
+            }
+        ],
+        "sizes": [
+            {
+                "id": 15,
+                "name": null
+            }
+        ],
+        "inventories_count": 1
+    },
+    {
+        "id": 13,
+        "name": "CeraVe Lotion",
+        "colors": [
+            {
+                "id": 8,
+                "name": null
+            }
+        ],
+        "sizes": [
+            {
+                "id": 15,
+                "name": null
+            }
+        ],
+        "inventories_count": 1
+    },
+    {
+        "id": 6,
+        "name": "CeraVe Moisturizing Lotion",
+        "colors": [
+            {
+                "id": 4,
+                "name": null
+            },
+            {
+                "id": 8,
+                "name": null
+            }
+        ],
+        "sizes": [
+            {
+                "id": 3,
+                "name": null
+            },
+            {
+                "id": 17,
+                "name": null
+            }
+        ],
+        "inventories_count": 2
+    },
+    {
+        "id": 5,
+        "name": "CeraVe Moisturizing Lotion",
+        "colors": [
+            {
+                "id": 4,
+                "name": null
+            }
+        ],
+        "sizes": [
+            {
+                "id": 3,
+                "name": null
+            }
+        ],
+        "inventories_count": 1
+    }
+]

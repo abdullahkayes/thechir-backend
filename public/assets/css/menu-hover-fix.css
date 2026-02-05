@@ -1,0 +1,169 @@
+/**
+ * CRITICAL: Menu Hover/Select Fix
+ * Prevents unwanted auto-selection and hover cascading
+ * Isolates hover effects to prevent cross-contamination
+ */
+
+/* ===== PREVENT TEXT SELECTION =====*/
+.sidebar .nav-item,
+.sidebar .nav-link,
+.sidebar .link-title,
+.sidebar .link-icon,
+.sidebar .link-arrow {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* ===== FIX HOVER ONLY FOR MAIN MENU ITEMS (NOT SUB-MENUS) ===== */
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item:hover > .nav-link {
+  color: #727cf5;
+  pointer-events: auto;
+}
+
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item:hover > .nav-link .link-title {
+  margin-left: 31px;
+}
+
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item:hover > .nav-link .link-icon {
+  color: #727cf5;
+  fill: rgba(239, 243, 255, 0.5);
+}
+
+/* ===== PREVENT NESTED HOVER FROM AFFECTING PARENT =====*/
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item .collapse:hover {
+  /* Do not propagate hover effects */
+  pointer-events: none;
+}
+
+.sidebar .sidebar-body .nav.sub-menu .nav-item .collapse {
+  /* Prevent collapse from being hovered */
+  pointer-events: none;
+}
+
+/* ===== ISOLATE SUBMENU HOVER =====*/
+.sidebar .sidebar-body .nav.sub-menu .nav-item:hover > .nav-link {
+  color: #727cf5;
+  margin-left: 3px;
+  /* Don't let this affect parent */
+  pointer-events: auto;
+}
+
+.sidebar .sidebar-body .nav.sub-menu .nav-item:hover > .nav-link::before {
+  border: 1px solid #727cf5;
+  background: #727cf5;
+}
+
+/* ===== ACTIVE STATE SHOULD NOT BE AFFECTED BY HOVER =====*/
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item.active > .nav-link {
+  color: #727cf5;
+  pointer-events: auto;
+}
+
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item.active > .nav-link::before {
+  content: '';
+  width: 3px;
+  height: 26px;
+  background: #727cf5;
+  position: absolute;
+  left: -25px;
+}
+
+.sidebar .sidebar-body .nav:not(.sub-menu) .nav-item.active > .nav-link .link-icon {
+  fill: rgba(239, 243, 255, 0.5);
+  color: #727cf5;
+}
+
+/* ===== SUBMENU ACTIVE STATE =====*/
+.sidebar .sidebar-body .nav.sub-menu .nav-item > .nav-link.active {
+  color: #727cf5;
+  pointer-events: auto;
+}
+
+.sidebar .sidebar-body .nav.sub-menu .nav-item > .nav-link.active::before {
+  border: 1px solid #727cf5;
+  background: #727cf5;
+}
+
+/* ===== PREVENT DROPDOWN FROM INHERITING PARENT HOVER =====*/
+.sidebar .sidebar-body .collapse {
+  pointer-events: auto !important;
+}
+
+.sidebar .sidebar-body .collapse.show {
+  pointer-events: auto !important;
+}
+
+.sidebar .sidebar-body .collapse .nav-item {
+  pointer-events: auto !important;
+}
+
+/* ===== ENSURE NAV LINKS DON'T INHERIT UNWANTED STYLES =====*/
+.sidebar .sidebar-body .nav .nav-item .nav-link {
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar .sidebar-body .nav .nav-item .nav-link[aria-expanded="true"] {
+  color: #727cf5;
+  pointer-events: auto;
+}
+
+.sidebar .sidebar-body .nav .nav-item .nav-link[aria-expanded="true"] .link-arrow {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/* ===== PREVENT CURSOR STICKINESS =====*/
+.sidebar .sidebar-body .nav .nav-item {
+  cursor: default;
+}
+
+.sidebar .sidebar-body .nav .nav-item .nav-link {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar .sidebar-body .nav .nav-item.nav-category {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ===== ISOLATE COLLAPSE SHOW STATE =====*/
+.sidebar .collapse.show {
+  display: block !important;
+}
+
+.sidebar .collapse:not(.show) {
+  display: none !important;
+}
+
+/* ===== PREVENT PARENT-CHILD INTERACTION ISSUES =====*/
+.sidebar .nav-item .nav-link:not([data-toggle="collapse"]) {
+  /* Regular links don't have child elements */
+}
+
+.sidebar .nav-item [data-toggle="collapse"] {
+  /* Collapse toggles manage their own state */
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ===== PREVENT BODY TEXT SELECTION DURING NAVIGATION =====*/
+.sidebar .sidebar-body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ===== ENSURE DROPDOWN ITEMS ARE SELECTABLE IF NEEDED =====*/
+.sidebar .collapse .nav-item .nav-link {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

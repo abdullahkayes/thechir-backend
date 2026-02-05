@@ -41,7 +41,7 @@
                  @error('photo')
                      <strong class="text-danger">{{ $message }}</strong>
                  @enderror
-                 <img id="blah" width="200" src="{{ asset('upload/user/') }}/{{ Auth::user()->photo }}" >
+                 <img id="blah" width="200" src="{{ asset('upload/user/') }}/{{ Auth::user()->photo ?? 'default.png' }}" >
                  </div>
 
                  <div class="mb-3">
