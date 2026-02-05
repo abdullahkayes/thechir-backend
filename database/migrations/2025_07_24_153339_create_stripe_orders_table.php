@@ -14,16 +14,21 @@ return new class extends Migration
         Schema::create('stripe_orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
-            $table->integer('coustomer_id');
-            $table->integer('sub_total');
-            $table->integer('total');
-            $table->integer('discount');
-            $table->integer('payment_method');
+            $table->integer('coustomer_id')->nullable();
+            $table->integer('reseller_id')->nullable();
+            $table->integer('b2b_id')->nullable();
+            $table->integer('distributer_id')->nullable();
+            $table->integer('amazon_id')->nullable();
+            $table->decimal('sub_total', 10, 2);
+            $table->decimal('total', 10, 2);
+            $table->decimal('discount', 10, 2)->nullable();
+            $table->string('payment_method')->nullable();
             $table->string('coupon')->nullable();
+            $table->string('status')->default('pending');
             $table->string('name');
             $table->string('company')->nullable();
             $table->string('street');
-            $table->string('apartment');
+            $table->string('apartment')->nullable();
             $table->string('city');
             $table->string('phone');
             $table->string('email');

@@ -14,17 +14,20 @@ return new class extends Migration
         Schema::create('paypal_orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
+            $table->decimal('sub_total', 10, 2);
+            $table->decimal('total', 10, 2);
+            $table->decimal('discount', 10, 2)->nullable();
             $table->unsignedBigInteger('coustomer_id')->nullable();
             $table->unsignedBigInteger('reseller_id')->nullable();
             $table->unsignedBigInteger('b2b_id')->nullable();
             $table->unsignedBigInteger('distributer_id')->nullable();
-            $table->decimal('sub_total', 10, 2);
-            $table->decimal('total', 10, 2);
-            $table->decimal('discount', 10, 2)->default(0);
-            $table->decimal('delivery_charge', 10, 2)->default(0);
-            $table->integer('payment_method');
-            $table->string('coupon')->nullable();
-            $table->integer('status')->default(1);
+            $table->unsignedBigInteger('amazon_id')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('payer_id')->nullable();
+            $table->string('payer_email')->nullable();
+            $table->decimal('amount', 10, 2);
+            $table->string('currency')->default('USD');
+            $table->string('status')->default('pending');
             $table->string('name');
             $table->string('company')->nullable();
             $table->text('street');
@@ -32,6 +35,9 @@ return new class extends Migration
             $table->string('city');
             $table->string('phone');
             $table->string('email');
+            $table->decimal('delivery_charge', 10, 2)->default(0);
+            $table->string('payment_method')->nullable();
+            $table->string('coupon')->nullable();
             $table->timestamps();
 
             // Add foreign key constraints

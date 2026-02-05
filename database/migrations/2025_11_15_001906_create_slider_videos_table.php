@@ -18,9 +18,14 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('product_image');
             $table->string('name');
-            $table->decimal('price');
-            $table->decimal('discount_price');
+            $table->decimal('price', 10, 2);
+            $table->decimal('discount_price', 10, 2)->nullable();
+            $table->decimal('wholesale_price', 10, 2)->nullable();
+            $table->decimal('reseller_price', 10, 2)->nullable();
+            $table->decimal('distributer_price', 10, 2)->nullable();
+            $table->decimal('amazon_price', 10, 2)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

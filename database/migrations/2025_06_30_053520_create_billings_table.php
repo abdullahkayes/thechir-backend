@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('order_id');
             $table->integer('coustomer_id')->nullable();
+            $table->unsignedBigInteger('reseller_id')->nullable();
+            $table->unsignedBigInteger('b2b_id')->nullable();
+            $table->unsignedBigInteger('distributer_id')->nullable();
+            $table->unsignedBigInteger('amazon_id')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->string('name');
             $table->string('company')->nullable();
             $table->string('street');
@@ -23,6 +28,11 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->timestamps();
+
+            $table->foreign('reseller_id')->references('id')->on('resellers')->onDelete('cascade');
+            $table->foreign('b2b_id')->references('id')->on('b2bs')->onDelete('cascade');
+            $table->foreign('distributer_id')->references('id')->on('distributers')->onDelete('cascade');
+            $table->foreign('amazon_id')->references('id')->on('amazons')->onDelete('cascade');
         });
     }
 

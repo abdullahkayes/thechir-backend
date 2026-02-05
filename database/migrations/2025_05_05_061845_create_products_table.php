@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('short_desp');
             $table->longText('long_desp');
             $table->string('preview');
+            $table->integer('brand_id')->nullable();
+            $table->integer('weight_grams')->default(500);
             $table->softDeletes();
             $table->timestamps();
         });
