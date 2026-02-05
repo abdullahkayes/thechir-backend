@@ -21,6 +21,9 @@ return new class extends Migration
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->boolean('is_active')->default(true);
+            $table->text('google_maps_api_key')->nullable();
+            $table->text('locationiq_api_key')->nullable();
+            $table->integer('api_key_index')->nullable();
             $table->timestamps();
         });
     }

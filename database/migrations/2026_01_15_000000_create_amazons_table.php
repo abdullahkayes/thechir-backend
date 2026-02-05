@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('shipping_address');
             $table->enum('status', ['pending', 'approved'])->default('pending');
             $table->string('ref_id');
+            $table->string('amazon_seller_id')->nullable();
+            $table->string('website')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

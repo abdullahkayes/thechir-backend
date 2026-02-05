@@ -16,9 +16,13 @@ return new class extends Migration
             $table->foreignId('reseller_id')->constrained('resellers')->onDelete('cascade');
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->decimal('amount', 8, 2);
-            $table->enum('status', ['pending', 'available', 'paid'])->default('pending');
+            $table->enum('status', ['pending', 'available', 'paid', 'used'])->default('pending');
             $table->timestamp('paid_at')->nullable();
+            $table->unsignedBigInteger('used_in_order_id')->nullable();
             $table->timestamps();
+
+            // Add foreign key constraint for used_in_order_id
+            $table->foreign('used_in_order_id')->references('id')->on('orders')->onDelete('set null');
         });
     }
 

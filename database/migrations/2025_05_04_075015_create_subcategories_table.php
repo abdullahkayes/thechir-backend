@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('category_id');
             $table->string('subcategory_name');
-            $table->string('subcategory_iamge');
             $table->softDeletes();
             $table->timestamps();
         });

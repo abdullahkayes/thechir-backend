@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('ref_link');
             $table->string('discount_code');
             $table->decimal('commission_percentage', 5, 2)->default(5.00);
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->rememberToken();
             $table->timestamps();
         });
